@@ -7,13 +7,37 @@ public class Account {
     private String accountType;
 
 
-    public Account(String accountNumber, String customerID, Double money, String accountType) {
+    public Account(String accountNumber, String customerID, String accountType) {
         this.accountNumber = accountNumber;
         this.customerID = customerID;
-        this.money = money;
+
         this.accountType = accountType;
+        setMoney((double)0);
 
+    }
 
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public String getAccountNumber() {

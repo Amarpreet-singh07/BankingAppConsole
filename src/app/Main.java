@@ -41,11 +41,14 @@ public class Main
             {
                 case "0" -> isRunning = false;
                 case "1" -> openAccount(scanner,bankServices);
+                case "2" -> depositMoney(scanner,bankServices);
                 case "6" -> listAllAccounts(scanner,bankServices);
             }
         }
 
     }
+
+
 
 
     private static void openAccount(Scanner scanner, BankServices bankServices)
@@ -60,11 +63,28 @@ public class Main
         String mobileNumber = scanner.nextLine().trim();
         System.out.print("Enter your age ");
         Integer age = scanner.nextInt();
-        System.out.print("Enter amount you want to deposite ");
-        Double moneyInitial = scanner.nextDouble();
-        scanner.nextLine(); // Clear the remaining newline character
-        bankServices.openAccount(name,accountType,(double)0,mobileNumber,age,email);
 
+        scanner.nextLine(); // Clear the remaining newline character
+        String accountNumber = bankServices.openAccount(name,accountType,(double)0,mobileNumber,age,email);
+
+        System.out.println("Your account is created A/c number is : "  + accountNumber);
+
+
+
+    }
+
+
+    private static void depositMoney(Scanner scanner, BankServices bankServices) {
+        System.out.print("Enter your account number");
+        String accountNum = scanner.nextLine().trim();
+        System.out.print("Enter amount you want to deposite ");
+        Double moneyDeposit = scanner.nextDouble();
+        System.out.print("Add a note for the transaction");
+        String note = scanner.nextLine();
+
+        bankServices.depositMoney(accountNum,moneyDeposit,note);
+
+        System.out.println("Money Deposited");
     }
     private static void listAllAccounts(Scanner scanner, BankServices bankServices)
     {
@@ -72,8 +92,7 @@ public class Main
 
         System.out.println("**** Account Database **** ");
 
-        bankServices.listOfAccounts().forEach(account -> System.out.println("Account number : " + account.getAccountNumber()));
-//bankServices.listOfAccounts.forEach( account-> System.out.println("Account Number -" + account.getAccountNumber()));
+        bankServices.listOfAccounts().forEach(account -> System.out.println("Account number : " + account.getAccountNumber()+ " || Account Type " + account.getAccountType() + " | Money" + account.getMoney()));
     }
 
 }

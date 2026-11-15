@@ -2,10 +2,8 @@ package repositories;
 
 import domain.Account;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.swing.text.html.Option;
+import java.util.*;
 
 public class AccountRepos
 {
@@ -24,5 +22,10 @@ public class AccountRepos
     public List<Account> getListOfAccounts()
     {
         return new ArrayList<>(accountRepos.values());
+    }
+
+    public Optional<Account> getAccountObject(String accountNum)
+    {
+        return Optional.ofNullable(accountRepos.get(accountNum));
     }
 }

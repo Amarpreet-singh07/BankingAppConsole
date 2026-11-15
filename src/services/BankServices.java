@@ -6,4 +6,6 @@ public interface BankServices
 {
     String openAccount(String name,String accountType,Double intialBalance,String mobileNumber,Integer age,String email);
     List<Account> listOfAccounts();
+
+    void depositMoney(String accountNum, Double moneyDeposit, String note);
 }
