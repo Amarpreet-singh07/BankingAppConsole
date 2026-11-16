@@ -58,6 +58,23 @@ public class BankConsoleServicesImplementation implements BankServices
         transactionRepos.enterTransaction(transaction);
     }
 
+    @Override
+    public void withdrawMoney(String accountNumber, Double amount, String note) {
+        Account accountobj = accountRepos.getAccountObject(accountNumber)
+                .orElseThrow(()-> new RuntimeException("Invalid Account " + accountNumber));
+        if(accountobj.getMoney().compareTo(amount) < 0)
+        {
+            throw new RuntimeException("Amount is not efficient");
+        }
+        else
+        {
+            accountobj.setMoney(accountobj.getMoney() - amount);
+            Transaction transaction = new Transaction(accountNumber,UUID.randomUUID().toString(),TransactionType.DEPOSIT,amount,LocalDateTime.now(),note);
+            transactionRepos.enterTransaction(transaction);
+        }
+
+    }
+
     private String getAccountNumber()
     {
         Integer totalAccounts = accountRepos.gettotalAccounts() + 1;

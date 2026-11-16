@@ -8,4 +8,6 @@ public interface BankServices
     List<Account> listOfAccounts();
 
     void depositMoney(String accountNum, Double moneyDeposit, String note);
+
+    void withdrawMoney(String accountNumber, Double amount, String note);
 }

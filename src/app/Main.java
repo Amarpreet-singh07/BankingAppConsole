@@ -42,13 +42,13 @@ public class Main
                 case "0" -> isRunning = false;
                 case "1" -> openAccount(scanner,bankServices);
                 case "2" -> depositMoney(scanner,bankServices);
+                case "3" -> withdrawMoney(scanner,bankServices);
+
                 case "6" -> listAllAccounts(scanner,bankServices);
             }
         }
 
     }
-
-
 
 
     private static void openAccount(Scanner scanner, BankServices bankServices)
@@ -86,6 +86,24 @@ public class Main
 
         System.out.println("Money Deposited");
     }
+
+
+    private static void withdrawMoney(Scanner scanner, BankServices bankServices)
+    {
+        System.out.print("Enter your account number : ");
+        String accountNumber = scanner.nextLine();
+        System.out.print("Enter amount to withdraw : ");
+        Double amount = scanner.nextDouble();
+        System.out.print("Enter note for the transaction : ");
+        String note = scanner.nextLine();
+    
+        bankServices.withdrawMoney(accountNumber,amount,note);
+
+        System.out.println("Money Withdrawed ");
+    }
+
+
+
     private static void listAllAccounts(Scanner scanner, BankServices bankServices)
     {
 
@@ -94,5 +112,7 @@ public class Main
 
         bankServices.listOfAccounts().forEach(account -> System.out.println("Account number : " + account.getAccountNumber()+ " || Account Type " + account.getAccountType() + " | Money" + account.getMoney()));
     }
+
+
 
 }
