@@ -75,6 +75,28 @@ public class BankConsoleServicesImplementation implements BankServices
 
     }
 
+    @Override
+    public void transferAmount(String fromAcc, String toAcc, Double amount, String note)
+    {
+       Account fromAccount = accountRepos.getAccountObject(fromAcc).orElseThrow(()-> new RuntimeException("Not valid fromAccount : " + fromAcc));
+       Account toAccount = accountRepos.getAccountObject(toAcc).orElseThrow(()-> new RuntimeException("Not valid toAccount : " + toAcc));
+
+       if(fromAccount.getMoney().compareTo(amount)<0)
+       {
+           throw new RuntimeException("Not sufficient balance");
+
+       }
+       fromAccount.setMoney(fromAccount.getMoney() - amount);
+       toAccount.setMoney(toAccount.getMoney() - amount);
+
+       Transaction fromTransaction = new Transaction(fromAcc,UUID.randomUUID().toString(),TransactionType.TRANSACTION_OUT,amount,LocalDateTime.now(),note);
+       Transaction toTransaction = new Transaction(toAcc,UUID.randomUUID().toString(),TransactionType.TRANSACTION_IN,amount,LocalDateTime.now(),note);
+
+       transactionRepos.enterTransaction(fromTransaction);
+       transactionRepos.enterTransaction(toTransaction);
+
+    }
+
     private String getAccountNumber()
     {
         Integer totalAccounts = accountRepos.gettotalAccounts() + 1;

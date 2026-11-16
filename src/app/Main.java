@@ -4,6 +4,7 @@ import domain.Account;
 import services.BankServices;
 import services.services.impl.BankConsoleServicesImplementation;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,12 +44,15 @@ public class Main
                 case "1" -> openAccount(scanner,bankServices);
                 case "2" -> depositMoney(scanner,bankServices);
                 case "3" -> withdrawMoney(scanner,bankServices);
+                case "4" -> transferMoney(scanner,bankServices);
 
                 case "6" -> listAllAccounts(scanner,bankServices);
             }
         }
 
     }
+
+
 
 
     private static void openAccount(Scanner scanner, BankServices bankServices)
@@ -102,7 +106,21 @@ public class Main
         System.out.println("Money Withdrawed ");
     }
 
+    private static void transferMoney(Scanner scanner, BankServices bankServices)
+    {
+        System.out.print("Enter From Acc number : ");
+        String fromAcc = scanner.nextLine();
+        System.out.print("Enter To Acc number : ");
+        String toAcc = scanner.nextLine();
+        System.out.print("Enter amounnt to transfer ");
+        Double amount = scanner.nextDouble();
+        System.out.print("Enter note for the transaction ");
+        String note = scanner.nextLine();
 
+        bankServices.transferAmount(fromAcc,toAcc,amount,note);
+
+        System.out.println("Money Transfered");
+    }
 
     private static void listAllAccounts(Scanner scanner, BankServices bankServices)
     {

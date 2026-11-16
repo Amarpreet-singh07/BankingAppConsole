@@ -10,4 +10,6 @@ public interface BankServices
     void depositMoney(String accountNum, Double moneyDeposit, String note);
 
     void withdrawMoney(String accountNumber, Double amount, String note);
+
+    void transferAmount(String fromAcc, String toAcc, Double amount, String note);
 }
