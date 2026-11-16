@@ -69,7 +69,7 @@ public class BankConsoleServicesImplementation implements BankServices
         else
         {
             accountobj.setMoney(accountobj.getMoney() - amount);
-            Transaction transaction = new Transaction(accountNumber,UUID.randomUUID().toString(),TransactionType.DEPOSIT,amount,LocalDateTime.now(),note);
+            Transaction transaction = new Transaction(accountNumber,UUID.randomUUID().toString(),TransactionType.WIDTHDRAW,amount,LocalDateTime.now(),note);
             transactionRepos.enterTransaction(transaction);
         }
 

@@ -96,7 +96,7 @@ public class Main
         Double amount = scanner.nextDouble();
         System.out.print("Enter note for the transaction : ");
         String note = scanner.nextLine();
-    
+
         bankServices.withdrawMoney(accountNumber,amount,note);
 
         System.out.println("Money Withdrawed ");
